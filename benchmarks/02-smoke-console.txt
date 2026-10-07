@@ -1,0 +1,44 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261007104424
+Username: THÔNG\tohuy
+RunAs User: THÔNG\tohuy
+Configuration Name: 
+Machine: THÔNG (Microsoft Windows NT 10.0.26200.0)
+Host Application: powershell.exe -NoLogo -NoProfile -NoExit -ExecutionPolicy Bypass -File C:\Temp\day20-smoke.ps1
+Process ID: 2860
+PSVersion: 5.1.26100.9444
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9444
+BuildVersion: 10.0.26100.9444
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is benchmarks/02-smoke-console.txt
+
+────────────────────────────────────────────────────────────────
+  Smoke test against http://localhost:8080
+────────────────────────────────────────────────────────────────
+  /metrics before : tokens_predicted_total = 0
+
+==> POST http://localhost:8080/v1/chat/completions
+
+Goodput@SLO measures the actual amount of work completed relative to the service level objective target.
+
+  server timings: prompt 35 tok in 647 ms  ->  54.1 tok/s prefill
+                  decode 21 tok in 292 ms  ->  68.5 tok/s
+
+==> GET http://localhost:8080/metrics   (rubric item 7 -- screenshot this)
+   llamacpp:tokens_predicted_total                   21.00   (+21)
+   llamacpp:prompt_tokens_total                      35.00   (+35)
+   llamacpp:n_decode_total                           23.00   (+23)
+   llamacpp:requests_processing                       0.00
+   llamacpp:n_busy_slots_per_decode                   1.00   (+1)
+
+OK -- served a completion and tokens_predicted_total is 21 (non-zero).
+**********************
+Windows PowerShell transcript end
+End time: 20261007104432
+**********************
