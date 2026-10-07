@@ -1,0 +1,90 @@
+{
+  "measured_at": "2026-10-07T10:26:25.573076+07:00",
+  "prompt": "Answer in English in at most 120 words. A streaming request starts at 0 ms, returns its first token at 200 ms, and finishes its 41st and last token at 1000 ms. Compute TTFT, TPOT (exclude the first token), and end-to-end latency, showing the formulas. Then explain whether a 2-bit model must decode faster than a 4-bit model, and give one reason why not.",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "max_tokens": 256,
+    "reasoning": "off"
+  },
+  "responses": {
+    "primary": {
+      "quant": "UD-Q4_K_XL",
+      "response": {
+        "choices": [
+          {
+            "finish_reason": "stop",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "**Latency Calculations:**\n\n*   **Time to First Token (TTFT):** $200 \\text{ ms} - 0 \\text{ ms} = 200 \\text{ ms}$\n*   **Time Per Output Token (TPOT, excluding first):** $(1000 \\text{ ms} - 200 \\text{ ms}) / (41 - 1) = 800 \\text{ ms} / 40 = 20 \\text{ ms/token}$\n*   **End-to-End Latency:** $1000 \\text{ ms} - 0 \\text{ ms} = 1000 \\text{ ms}$\n\n**Model Decoding Speed:**\n\nA 2-bit model does **not** necessarily need to decode faster than a 4-bit model. A 4-bit model might be faster if its decoding process is highly parallelizable or if the overhead associated with the 2-bit model's decoding logic is significant. The required decoding speed depends on the specific hardware architecture and the complexity of the decoding algorithm, not solely on the bit width."
+            }
+          }
+        ],
+        "created": 1791343598,
+        "model": "D:\\K4-L3-DAY20-ToHuyThong-2A202602608-ModelServing\\models\\gemma-4-E2B-it-UD-Q4_K_XL.gguf",
+        "system_fingerprint": "b10488-9d77fa172",
+        "object": "chat.completion",
+        "usage": {
+          "completion_tokens": 246,
+          "prompt_tokens": 110,
+          "total_tokens": 356,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "id": "chatcmpl-owSmKuJLNETcu26r5SJ5KgkjGmvUIC4J",
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 110,
+          "prompt_ms": 606.164,
+          "prompt_per_token_ms": 5.5105818181818185,
+          "prompt_per_second": 181.4690413815403,
+          "predicted_n": 246,
+          "predicted_ms": 3287.197,
+          "predicted_per_token_ms": 13.417130612244899,
+          "predicted_per_second": 74.53158420380646
+        }
+      }
+    },
+    "compare": {
+      "quant": "UD-Q2_K_XL",
+      "response": {
+        "choices": [
+          {
+            "finish_reason": "length",
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Here are the computations:\n\n**TTFT (Time to First Token):**\n$$TTFT = \\text{Time of first token} - \\text{Start time} = 200 \\text{ ms} - 0 \\text{ ms} = 200 \\text{ ms}$$\n\n**TPOT (Token Processing Time):**\n$$TPOT = \\text{Time of last token} - \\text{Time of first token} = 1000 \\text{ ms} - 200 \\text{ ms} = 800 \\text{ ms}$$\n\n**End-to-End Latency:**\n$$\\text{End-to-End Latency} = \\text{Time of last token} - \\text{Start time} = 1000 \\text{ ms} - 0 \\text{ ms} = 1000 \\text{ ms}$$\n\n**Model Decoding Speed:**\nNo, a 2-bit model does not *necessarily* need to decode faster than a 4-bit model. The required decoding speed depends on the specific latency constraints and the efficiency of the model architecture. A smaller model might achieve the same latency with a more"
+            }
+          }
+        ],
+        "created": 1791343608,
+        "model": "D:\\K4-L3-DAY20-ToHuyThong-2A202602608-ModelServing\\models\\gemma-4-E2B-it-UD-Q2_K_XL.gguf",
+        "system_fingerprint": "b10488-9d77fa172",
+        "object": "chat.completion",
+        "usage": {
+          "completion_tokens": 256,
+          "prompt_tokens": 110,
+          "total_tokens": 366,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "id": "chatcmpl-wIjgxiKiXzNVplATDmSiAUHuLR2XIX5B",
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 110,
+          "prompt_ms": 902.478,
+          "prompt_per_token_ms": 8.204345454545454,
+          "prompt_per_second": 121.88662770726823,
+          "predicted_n": 256,
+          "predicted_ms": 3442.048,
+          "predicted_per_token_ms": 13.49822745098039,
+          "predicted_per_second": 74.08380127180098
+        }
+      }
+    }
+  }
+}

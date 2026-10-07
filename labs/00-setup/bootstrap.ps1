@@ -5,6 +5,7 @@
 #
 # Afterwards, use .\lab.ps1 <target> for every step docs/GUIDE.md writes as `make <target>`.
 $ErrorActionPreference = 'Stop'
+$env:PYTHONIOENCODING = 'utf-8'
 Set-Location (Join-Path $PSScriptRoot '..\..')
 
 if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
@@ -20,12 +21,18 @@ if ([int]$maj -lt 3 -or ([int]$maj -eq 3 -and [int]$min -lt 10)) {
 }
 Write-Host "==> Python $ver"
 
-if (-not (Test-Path '.venv')) { python -m venv .venv }
+if (-not (Test-Path '.venv')) {
+    python -m venv .venv
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+}
 & .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip wheel | Out-Null
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 pip install -r requirements.txt
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 python .\labs\00-setup\setup.py
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 Write-Host ""
 Write-Host "==> Next steps use .\lab.ps1 (the Windows equivalent of make):" -ForegroundColor Green
